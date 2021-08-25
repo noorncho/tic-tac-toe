@@ -1,0 +1,29 @@
+#grid {
+  height: 100%;
+  width: 50vh;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+}
+#grid__buttons {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: repeat(3, 1fr);
+  height: 75%;
+  width: 100%;
+}
+
+.game_button {
+  background-color: #651ea0;
+  border-color: #270744;
+  color: white;
+}
+
+* {
+  box-sizing: border-box;
+}
