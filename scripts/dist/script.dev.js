@@ -4,13 +4,16 @@
 var gameButtons = document.querySelectorAll(".board_button");
 ; //Restart buttons
 
-var restartButton = document.querySelector("#restart"); //Board grid array - grid = [0, 1, 2, 3, 4, 5, 6, 7, 8]
+var restartButton = document.querySelector("#restart"); //Game Over Modal
+
+var gameModal = document.querySelector(".modal");
+var modalclose = document.querySelector(".modal__close"); //Board grid array - grid = [0, 1, 2, 3, 4, 5, 6, 7, 8]
 
 var BoardGridArr = ["", "", "", "", "", "", "", "", ""]; //Counter variables
 
 var turnCounter = 0; //Track player turns
 
-var moveCounter = 0; //Tracks number of moved taken
+var moveCounter = 1; //Tracks number of moved taken
 
 var isWinner = false;
 var currentPlayer = "X"; //X is always the first player
@@ -36,6 +39,13 @@ gameButtons.forEach(function (button) {
 restartButton.addEventListener("click", function () {
   restartGame();
 });
+modalclose.addEventListener("click", function () {
+  gameModal.style.display = "none";
+});
+/**
+ * 
+ * @param {*} selectedButton 
+ */
 
 var gamePlay = function gamePlay(selectedButton) {
   var gridLocation = selectedButton.id; //console.log(currentPlayer);
@@ -44,12 +54,17 @@ var gamePlay = function gamePlay(selectedButton) {
   BoardGridArr[gridLocation] = currentPlayer;
   selectedButton.disabled = true;
   checkForWin();
+  /*if(isWinner){
+      //Do something to end the game
+      console.log(`${currentPlayer} is the winner`);
+      gameModal.style.display = "block";
+  }
+  moveCounter++;
+  if(moveCounter == 9){
+      gameModal.style.display = "block";
+  }*/
 
-  if (isWinner) {
-    //Do something to end the game
-    console.log("".concat(currentPlayer, " is the winner"));
-  } //Update counter
-
+  gameOver(isWinner); //Update counter
 
   turnCounter++; //Switch the player
 
@@ -67,9 +82,10 @@ var gamePlay = function gamePlay(selectedButton) {
 var restartGame = function restartGame() {
   //Reset Counters and variables
   turnCounter = 0;
-  moveCounter = 0;
+  moveCounter = 1;
   isWinner = false;
-  currentPlayer = "X"; //Remove all values from array
+  currentPlayer = "X";
+  gameModal.style.display = "none"; //Remove all values from array
 
   for (var i = 0; i < BoardGridArr.length; i++) {
     BoardGridArr[i] = "";
@@ -103,5 +119,25 @@ var checkForWin = function checkForWin() {
       isWinner = true;
       break;
     }
+  }
+};
+
+var gameOver = function gameOver(isWinner) {
+  if (isWinner) {
+    console.log("".concat(currentPlayer, " is the winner"));
+    document.getElementById("overlay__content").innerHTML = "".concat(currentPlayer, " is the winner");
+    gameModal.style.display = "block";
+    gameButtons.forEach(function (button) {
+      return button.display = true;
+    });
+  } else if (moveCounter == 9) {
+    console.log("Game Draw");
+    document.getElementById("overlay__content").innerHTML = "Game Draw";
+    gameModal.style.display = "block";
+    gameButtons.forEach(function (button) {
+      return button.display = true;
+    });
+  } else {
+    moveCounter++;
   }
 };

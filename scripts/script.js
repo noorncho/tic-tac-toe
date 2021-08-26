@@ -4,12 +4,16 @@ const gameButtons = document.querySelectorAll(".board_button");;
 //Restart buttons
 const restartButton = document.querySelector("#restart");
 
+//Game Over Modal
+const gameModal = document.querySelector(".modal");
+const modalclose = document.querySelector(".modal__close");
+
 //Board grid array - grid = [0, 1, 2, 3, 4, 5, 6, 7, 8]
 const BoardGridArr = ["", "", "", "", "", "", "", "", ""];
 
 //Counter variables
 let turnCounter = 0; //Track player turns
-let moveCounter = 0; //Tracks number of moved taken
+let moveCounter = 1; //Tracks number of moved taken
 let isWinner = false;
 let currentPlayer = "X"; //X is always the first player
 
@@ -50,6 +54,15 @@ restartButton.addEventListener("click", () => {
     restartGame();
 });
 
+modalclose.addEventListener("click", () => {
+    gameModal.style.display = "none"
+})
+
+
+/**
+ * 
+ * @param {*} selectedButton 
+ */
 const gamePlay = (selectedButton) => {
     const gridLocation = selectedButton.id;
     //console.log(currentPlayer);
@@ -60,10 +73,17 @@ const gamePlay = (selectedButton) => {
     
     
     checkForWin();
-    if(isWinner){
+    /*if(isWinner){
         //Do something to end the game
         console.log(`${currentPlayer} is the winner`);
+        gameModal.style.display = "block";
     }
+    moveCounter++;
+    if(moveCounter == 9){
+        gameModal.style.display = "block";
+    }*/
+    gameOver(isWinner);
+
     
     //Update counter
     turnCounter++;
@@ -81,9 +101,11 @@ const gamePlay = (selectedButton) => {
 const restartGame = () => {
     //Reset Counters and variables
     turnCounter = 0;
-    moveCounter = 0;
+    moveCounter = 1;
     isWinner = false;
     currentPlayer = "X";
+
+    gameModal.style.display = "none";
 
     //Remove all values from array
     for(let i = 0; i < BoardGridArr.length; i++){
@@ -120,5 +142,22 @@ const checkForWin = () => {
             break;
         }
         
+    }
+}
+
+const gameOver = (isWinner) =>{
+
+    if(isWinner){
+        console.log(`${currentPlayer} is the winner`);
+        document.getElementById("overlay__content").innerHTML = `${currentPlayer} is the winner`;
+        gameModal.style.display = "block";
+        gameButtons.forEach(button => button.display = true);
+    }else if(moveCounter == 9){
+        console.log(`Game Draw`);
+        document.getElementById("overlay__content").innerHTML = "Game Draw";
+        gameModal.style.display = "block";
+        gameButtons.forEach(button => button.display = true);
+    }else{
+        moveCounter++;
     }
 }
