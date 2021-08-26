@@ -35,18 +35,6 @@ gameButtons.forEach(button => {
         const selectedButton = e.target; //Get the that was clicked
 
         gamePlay(selectedButton);
-
-        // const gridLocation = selectedButton.id;
-        
-        // BoardGridArr[gridLocation] = "Hello"
-        // selectedButton.textContent = "Hi Bitch"
-        
-        //Disable clicked buttons
-        // selectedButton.disabled = true;
-        // selectedButton.style.backgroundColor = "red";
-
-        //Check if win combo satisfied
-        //checkForWin();
     });
 });
 
@@ -65,34 +53,14 @@ modalclose.addEventListener("click", () => {
  */
 const gamePlay = (selectedButton) => {
     const gridLocation = selectedButton.id;
-    //console.log(currentPlayer);
     
     selectedButton.textContent = currentPlayer;
     BoardGridArr[gridLocation] = currentPlayer;
-    selectedButton.disabled = true;
-    
+    selectedButton.disabled = true;    
     
     checkForWin();
-    /*if(isWinner){
-        //Do something to end the game
-        console.log(`${currentPlayer} is the winner`);
-        gameModal.style.display = "block";
-    }
-    moveCounter++;
-    if(moveCounter == 9){
-        gameModal.style.display = "block";
-    }*/
-    gameOver(isWinner);
-
     
-    //Update counter
-    turnCounter++;
-    //Switch the player
-    if(!(turnCounter % 2)){
-        currentPlayer = "X";
-    }else{
-        currentPlayer = "O";
-    }
+    gameOver(isWinner);
 }
 
 /**
@@ -140,24 +108,33 @@ const checkForWin = () => {
         if(a === b && b === c){
             isWinner = true;
             break;
-        }
-        
+        }        
     }
 }
 
+/**
+ * 
+ * @param {*} isWinner 
+ */
 const gameOver = (isWinner) =>{
 
     if(isWinner){
-        console.log(`${currentPlayer} is the winner`);
         document.getElementById("overlay__content").innerHTML = `${currentPlayer} is the winner`;
         gameModal.style.display = "block";
         gameButtons.forEach(button => button.display = true);
     }else if(moveCounter == 9){
-        console.log(`Game Draw`);
         document.getElementById("overlay__content").innerHTML = "Game Draw";
         gameModal.style.display = "block";
         gameButtons.forEach(button => button.display = true);
     }else{
         moveCounter++;
+        //Update counter
+        turnCounter++;
+        //Switch the player
+        if(!(turnCounter % 2)){
+            currentPlayer = "X";
+        }else{
+            currentPlayer = "O";
+        }
     }
 }
