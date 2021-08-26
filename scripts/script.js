@@ -10,6 +10,8 @@ const BoardGridArr = ["", "", "", "", "", "", "", "", ""];
 //Counter variables
 let turnCounter = 0; //Track player turns
 let moveCounter = 0; //Tracks number of moved taken
+let isWinner = false;
+let currentPlayer = "X"; //X is always the first player
 
 //Win Combos - indexes in the array that have to match to win
 const winCombos = [[0, 1, 2], 
@@ -27,13 +29,20 @@ const winCombos = [[0, 1, 2],
 gameButtons.forEach(button => {
     button.addEventListener("click", e => {
         const selectedButton = e.target; //Get the that was clicked
-        const gridLocation = selectedButton.id;
+
+        gamePlay(selectedButton);
+
+        // const gridLocation = selectedButton.id;
         
-        BoardGridArr[gridLocation] = "Hello"
-        selectedButton.textContent = "Hi Bitch"
+        // BoardGridArr[gridLocation] = "Hello"
+        // selectedButton.textContent = "Hi Bitch"
         
+        //Disable clicked buttons
+        // selectedButton.disabled = true;
+        // selectedButton.style.backgroundColor = "red";
+
         //Check if win combo satisfied
-        checkForWin();
+        //checkForWin();
     });
 });
 
@@ -41,14 +50,40 @@ restartButton.addEventListener("click", () => {
     restartGame();
 });
 
+const gamePlay = (selectedButton) => {
+    const gridLocation = selectedButton.id;
+    //console.log(currentPlayer);
+    
+    selectedButton.textContent = currentPlayer;
+    BoardGridArr[gridLocation] = currentPlayer;
+    selectedButton.disabled = true;
+    
+    
+    checkForWin();
+    if(isWinner){
+        //Do something to end the game
+        console.log(`${currentPlayer} is the winner`);
+    }
+    
+    //Update counter
+    turnCounter++;
+    //Switch the player
+    if(!(turnCounter % 2)){
+        currentPlayer = "X";
+    }else{
+        currentPlayer = "O";
+    }
+}
 
 /**
  * Restart Function 
  */
 const restartGame = () => {
-    //Reset Counters
+    //Reset Counters and variables
     turnCounter = 0;
     moveCounter = 0;
+    isWinner = false;
+    currentPlayer = "X";
 
     //Remove all values from array
     for(let i = 0; i < BoardGridArr.length; i++){
@@ -56,17 +91,19 @@ const restartGame = () => {
     }
 
     //Remove text from buttons
-    gameButtons.forEach(button => button.textContent = "");
+    gameButtons.forEach(button =>{ 
+        button.textContent = "";
+        button.disabled = false;
+    });
 
-    console.log(BoardGridArr);
-    console.log(gameButtons.length);
+    // console.log(BoardGridArr);
+    // console.log(gameButtons.length);
 }
 
 /**
  * Check for a wining combination
  */
 const checkForWin = () => {
-    console.log("Check for winner");
 
     //Iterate through grid array and check for win combinations
     for(let i = 0; i < winCombos.length; i++){
@@ -79,7 +116,7 @@ const checkForWin = () => {
             continue;
         }
         if(a === b && b === c){
-            console.log("Winner");
+            isWinner = true;
             break;
         }
         
