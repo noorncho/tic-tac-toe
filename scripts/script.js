@@ -165,17 +165,6 @@ const checkGameOver = (isWinner) =>{
 const soloPlayerMode = () => {
     let computerTurn = true;
     
-    /*while(computerTurn){
-        //Generate a new location for next move
-        computerMove = Math.floor(Math.random() * 9);
-        console.log(computerMove);
-        if(BoardGridArr[computerMove] === "" && !gameButtons[computerMove].disabled){
-            gameButtons[computerMove].textContent = currentPlayer;
-            BoardGridArr[computerMove] = currentPlayer;
-            gameButtons[computerMove].disabled = true;
-            computerTurn = false;
-        }
-    }*/
     do{
         computerMove = Math.floor(Math.random() * 9);
         console.log(computerMove);
