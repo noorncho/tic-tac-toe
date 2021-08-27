@@ -1,0 +1,35 @@
+.overlay{
+    position: fixed;
+    display: none;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0,0,0,0.5);
+    z-index: 2;
+    cursor: pointer;
+
+    //Addition
+    color: black;
+
+    .modal{
+        max-width: 100%;
+        position: relative;
+        top: 10px;
+        margin: 5% 10%;
+        padding: 5px 20px 13px 20px;
+        border-radius: 10px;
+        background: #ffffff;
+        box-shadow: 0 0 10px #000000;
+        display: grid;
+        grid-template-columns: 1fr;
+        grid-template-rows: 1fr 1fr 2fr;
+        pointer-events: auto;
+    }
+}
+
+#overlay__content{
+    text-align: center;
+}

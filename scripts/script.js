@@ -1,15 +1,19 @@
 //Board Grid buttons
 const gameButtons = document.querySelectorAll(".board_button");;
 
-//Restart buttons
+//Restart button
 const restartButton = document.querySelector("#restart");
+
+//Game Over Modal
+const gameModal = document.querySelector(".modal");
+const modalclose = document.querySelector(".modal__close");
 
 //Board grid array - grid = [0, 1, 2, 3, 4, 5, 6, 7, 8]
 const BoardGridArr = ["", "", "", "", "", "", "", "", ""];
 
 //Counter variables
 let turnCounter = 0; //Track player turns
-let moveCounter = 0; //Tracks number of moved taken
+let moveCounter = 1; //Tracks number of moved taken
 let isWinner = false;
 let currentPlayer = "X"; //X is always the first player
 
@@ -31,18 +35,6 @@ gameButtons.forEach(button => {
         const selectedButton = e.target; //Get the that was clicked
 
         gamePlay(selectedButton);
-
-        // const gridLocation = selectedButton.id;
-        
-        // BoardGridArr[gridLocation] = "Hello"
-        // selectedButton.textContent = "Hi Bitch"
-        
-        //Disable clicked buttons
-        // selectedButton.disabled = true;
-        // selectedButton.style.backgroundColor = "red";
-
-        //Check if win combo satisfied
-        //checkForWin();
     });
 });
 
@@ -50,29 +42,25 @@ restartButton.addEventListener("click", () => {
     restartGame();
 });
 
+modalclose.addEventListener("click", () => {
+    gameModal.style.display = "none"
+})
+
+
+/**
+ * 
+ * @param {*} selectedButton 
+ */
 const gamePlay = (selectedButton) => {
     const gridLocation = selectedButton.id;
-    //console.log(currentPlayer);
     
     selectedButton.textContent = currentPlayer;
     BoardGridArr[gridLocation] = currentPlayer;
-    selectedButton.disabled = true;
-    
+    selectedButton.disabled = true;    
     
     checkForWin();
-    if(isWinner){
-        //Do something to end the game
-        console.log(`${currentPlayer} is the winner`);
-    }
     
-    //Update counter
-    turnCounter++;
-    //Switch the player
-    if(!(turnCounter % 2)){
-        currentPlayer = "X";
-    }else{
-        currentPlayer = "O";
-    }
+    checkGameOver(isWinner);
 }
 
 /**
@@ -81,9 +69,11 @@ const gamePlay = (selectedButton) => {
 const restartGame = () => {
     //Reset Counters and variables
     turnCounter = 0;
-    moveCounter = 0;
+    moveCounter = 1;
     isWinner = false;
     currentPlayer = "X";
+
+    gameModal.style.display = "none";
 
     //Remove all values from array
     for(let i = 0; i < BoardGridArr.length; i++){
@@ -95,9 +85,6 @@ const restartGame = () => {
         button.textContent = "";
         button.disabled = false;
     });
-
-    // console.log(BoardGridArr);
-    // console.log(gameButtons.length);
 }
 
 /**
@@ -118,7 +105,33 @@ const checkForWin = () => {
         if(a === b && b === c){
             isWinner = true;
             break;
+        }        
+    }
+}
+
+/**
+ * 
+ * @param {*} isWinner 
+ */
+const checkGameOver = (isWinner) =>{
+
+    if(isWinner){
+        document.getElementById("overlay__content").innerHTML = `${currentPlayer} is the winner`;
+        gameModal.style.display = "block";
+        gameButtons.forEach(button => button.display = true);
+    }else if(moveCounter == 9){
+        document.getElementById("overlay__content").innerHTML = "Game Draw";
+        gameModal.style.display = "block";
+        gameButtons.forEach(button => button.display = true);
+    }else{
+        moveCounter++;
+        //Update counter
+        turnCounter++;
+        //Switch the player
+        if(!(turnCounter % 2)){
+            currentPlayer = "X";
+        }else{
+            currentPlayer = "O";
         }
-        
     }
 }
