@@ -53,6 +53,10 @@
   pointer-events: auto;
 }
 
+#overlay__content {
+  text-align: center;
+}
+
 * {
   box-sizing: border-box;
 }
