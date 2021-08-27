@@ -1,7 +1,7 @@
 //Board Grid buttons
 const gameButtons = document.querySelectorAll(".board_button");;
 
-//Restart buttons
+//Restart button
 const restartButton = document.querySelector("#restart");
 
 //Game Over Modal
@@ -60,7 +60,7 @@ const gamePlay = (selectedButton) => {
     
     checkForWin();
     
-    gameOver(isWinner);
+    checkGameOver(isWinner);
 }
 
 /**
@@ -85,9 +85,6 @@ const restartGame = () => {
         button.textContent = "";
         button.disabled = false;
     });
-
-    // console.log(BoardGridArr);
-    // console.log(gameButtons.length);
 }
 
 /**
@@ -116,7 +113,7 @@ const checkForWin = () => {
  * 
  * @param {*} isWinner 
  */
-const gameOver = (isWinner) =>{
+const checkGameOver = (isWinner) =>{
 
     if(isWinner){
         document.getElementById("overlay__content").innerHTML = `${currentPlayer} is the winner`;

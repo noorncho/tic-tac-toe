@@ -2,7 +2,7 @@
 
 //Board Grid buttons
 var gameButtons = document.querySelectorAll(".board_button");
-; //Restart buttons
+; //Restart button
 
 var restartButton = document.querySelector("#restart"); //Game Over Modal
 
@@ -46,7 +46,7 @@ var gamePlay = function gamePlay(selectedButton) {
   BoardGridArr[gridLocation] = currentPlayer;
   selectedButton.disabled = true;
   checkForWin();
-  gameOver(isWinner);
+  checkGameOver(isWinner);
 };
 /**
  * Restart Function 
@@ -69,8 +69,7 @@ var restartGame = function restartGame() {
   gameButtons.forEach(function (button) {
     button.textContent = "";
     button.disabled = false;
-  }); // console.log(BoardGridArr);
-  // console.log(gameButtons.length);
+  });
 };
 /**
  * Check for a wining combination
@@ -101,7 +100,7 @@ var checkForWin = function checkForWin() {
  */
 
 
-var gameOver = function gameOver(isWinner) {
+var checkGameOver = function checkGameOver(isWinner) {
   if (isWinner) {
     document.getElementById("overlay__content").innerHTML = "".concat(currentPlayer, " is the winner");
     gameModal.style.display = "block";
