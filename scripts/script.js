@@ -180,11 +180,8 @@ const soloPlayerMode = () => {
             gameButtons[computerMove].disabled = true;
             computerTurn = false;
         }
-        
+
     }while(computerTurn);
 
     console.log(computerTurn);
-
-    //Generate a new location for next move
-   // computerMove = Math.floor(Math.random() * 9);
 }
