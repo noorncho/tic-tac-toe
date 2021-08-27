@@ -1,5 +1,28 @@
 .board_button{
-    background-color: rgb(101, 30, 160);
-    border-color: rgb(39, 7, 68);
-    color: white;
+    border-color: rgba(39, 7, 68, 0);
+    font-size: 4em;
+    background-color: white;
+}
+
+button:disabled{
+    color: rgb(83, 83, 83);
+}
+
+.border_bottom{
+    border-bottom: rgb(130, 28, 155) solid 5px;
+}
+
+.border_middle{
+    border-right: rgb(130, 28, 155) solid 5px;
+    border-left: rgb(130, 28, 155) solid 5px;
+}
+
+@media screen and (min-width: 768px){
+    .board_button{
+        font-size: 7em;
+    }
+
+    #restart{
+        font-size: 1.5em;
+    }
 }

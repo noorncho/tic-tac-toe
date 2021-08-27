@@ -1,6 +1,6 @@
 #grid{
     height: 100%;
-    width: 50vh;
+    width: 100%;//50vh;
 
     position: absolute;
     top: 50%;
@@ -12,12 +12,29 @@
     align-items: center;
     justify-content: space-between;
 
+    &__title{
+        width: 100%;
+        text-align: center;
+    }
+
     &__buttons{
         display: grid;
         grid-template-columns: repeat(3, 1fr);
         grid-template-rows: repeat(3, 1fr);
     
         height: 75%;
-        width: 100%;
+        width: 75%;
+    }
+
+    &__restart{
+        padding: 10px;
+    }
+}
+
+@media screen and (min-width: 768px){
+    #grid{
+        &__title{
+            font-size: 1.7em;
+        }
     }
 }
