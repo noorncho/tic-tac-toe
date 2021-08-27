@@ -1,6 +1,6 @@
 #grid {
   height: 100%;
-  width: 50vh;
+  width: 100%;
   position: absolute;
   top: 50%;
   left: 50%;
@@ -10,20 +10,54 @@
   align-items: center;
   justify-content: space-between;
 }
+#grid__title {
+  width: 100%;
+  text-align: center;
+}
 #grid__buttons {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   grid-template-rows: repeat(3, 1fr);
   height: 75%;
-  width: 100%;
+  width: 75%;
+}
+#grid__restart {
+  padding: 10px;
 }
 
+@media screen and (min-width: 768px) {
+  #grid__title {
+    font-size: 1.7em;
+  }
+}
 .board_button {
-  background-color: #651ea0;
-  border-color: #270744;
-  color: white;
+  border-color: rgba(39, 7, 68, 0);
+  font-size: 4em;
+  background-color: white;
 }
 
+button:disabled {
+  color: #535353;
+}
+
+.border_bottom {
+  border-bottom: #821c9b solid 5px;
+}
+
+.border_middle {
+  border-right: #821c9b solid 5px;
+  border-left: #821c9b solid 5px;
+}
+
+@media screen and (min-width: 768px) {
+  .board_button {
+    font-size: 7em;
+  }
+
+  #restart {
+    font-size: 1.5em;
+  }
+}
 .overlay {
   position: fixed;
   display: none;
