@@ -78,7 +78,11 @@ var restartGame = function restartGame() {
   moveCounter = 1;
   isWinner = false;
   currentPlayer = "X";
-  gameModal.style.display = "none"; //Remove all values from array
+  gameModal.style.display = "none";
+  singlePlayerMode = false;
+  singlePlayerButton.disabled = false;
+  singlePlayerButton.checked = false;
+  document.getElementById("player-mode").innerHTML = ""; //Remove all values from array
 
   for (var i = 0; i < BoardGridArr.length; i++) {
     BoardGridArr[i] = "";
@@ -149,9 +153,19 @@ var checkGameOver = function checkGameOver(isWinner) {
 
 var soloPlayerMode = function soloPlayerMode() {
   var computerTurn = true;
+  /*while(computerTurn){
+      //Generate a new location for next move
+      computerMove = Math.floor(Math.random() * 9);
+      console.log(computerMove);
+      if(BoardGridArr[computerMove] === "" && !gameButtons[computerMove].disabled){
+          gameButtons[computerMove].textContent = currentPlayer;
+          BoardGridArr[computerMove] = currentPlayer;
+          gameButtons[computerMove].disabled = true;
+          computerTurn = false;
+      }
+  }*/
 
-  while (computerTurn) {
-    //Generate a new location for next move
+  do {
     computerMove = Math.floor(Math.random() * 9);
     console.log(computerMove);
 
@@ -160,11 +174,8 @@ var soloPlayerMode = function soloPlayerMode() {
       BoardGridArr[computerMove] = currentPlayer;
       gameButtons[computerMove].disabled = true;
       computerTurn = false;
-    } else {
-      computerTurn = true;
     }
-  }
+  } while (computerTurn);
 
-  console.log(computerTurn); //Generate a new location for next move
-  // computerMove = Math.floor(Math.random() * 9);
+  console.log(computerTurn);
 };

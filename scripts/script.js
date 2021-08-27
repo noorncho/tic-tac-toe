@@ -94,6 +94,11 @@ const restartGame = () => {
 
     gameModal.style.display = "none";
 
+    singlePlayerMode = false;
+    singlePlayerButton.disabled = false;
+    singlePlayerButton.checked = false;
+    document.getElementById("player-mode").innerHTML = "";
+
     //Remove all values from array
     for(let i = 0; i < BoardGridArr.length; i++){
         BoardGridArr[i] = "";
