@@ -16,7 +16,12 @@ var turnCounter = 0; //Track player turns
 var moveCounter = 1; //Tracks number of moved taken
 
 var isWinner = false;
-var currentPlayer = "X"; //X is always the first player
+var currentPlayer = "X"; //X is always the first player or the human
+//Solo Player Mode - Variables
+
+var singlePlayerButton = document.getElementById("single-player");
+var singlePlayerMode = false;
+var computerMove; // = Math.floor(Math.random() * 9); //Generate number - [0, 1, 2, 3, 4, 5, 6, 7, 8]
 //Win Combos - indexes in the array that have to match to win
 
 var winCombos = [[0, 1, 2], [3, 4, 5], [6, 7, 8], [0, 3, 6], [1, 4, 7], [2, 5, 8], [0, 4, 8], [2, 4, 6]];
@@ -26,6 +31,9 @@ gameButtons.forEach(function (button) {
   button.addEventListener("click", function (e) {
     var selectedButton = e.target; //Get the that was clicked
 
+    singlePlayerButton.disabled = true; // Disabled if player does not selected before first move
+
+    document.getElementById("player-mode").innerHTML = "Two Player Mode Activated";
     gamePlay(selectedButton);
   });
 });
@@ -34,6 +42,12 @@ restartButton.addEventListener("click", function () {
 });
 modalclose.addEventListener("click", function () {
   gameModal.style.display = "none";
+});
+singlePlayerButton.addEventListener("click", function () {
+  console.log("Single Player mode activated");
+  document.getElementById("player-mode").innerHTML = "Single Player Mode Activated";
+  singlePlayerMode = true;
+  singlePlayerButton.disabled = true;
 });
 /**
  * 
@@ -46,7 +60,12 @@ var gamePlay = function gamePlay(selectedButton) {
   BoardGridArr[gridLocation] = currentPlayer;
   selectedButton.disabled = true;
   checkForWin();
-  checkGameOver(isWinner);
+
+  if (singlePlayerMode) {
+    soloPlayerMode();
+    checkForWin();
+  } //checkGameOver(isWinner);
+
 };
 /**
  * Restart Function 
@@ -93,6 +112,8 @@ var checkForWin = function checkForWin() {
       break;
     }
   }
+
+  checkGameOver(isWinner);
 };
 /**
  * 
@@ -105,13 +126,13 @@ var checkGameOver = function checkGameOver(isWinner) {
     document.getElementById("overlay__content").innerHTML = "".concat(currentPlayer, " is the winner");
     gameModal.style.display = "block";
     gameButtons.forEach(function (button) {
-      return button.display = true;
+      return button.disabled = true;
     });
   } else if (moveCounter == 9) {
     document.getElementById("overlay__content").innerHTML = "Game Draw";
     gameModal.style.display = "block";
     gameButtons.forEach(function (button) {
-      return button.display = true;
+      return button.disabled = true;
     });
   } else {
     moveCounter++; //Update counter
@@ -124,4 +145,26 @@ var checkGameOver = function checkGameOver(isWinner) {
       currentPlayer = "O";
     }
   }
+};
+
+var soloPlayerMode = function soloPlayerMode() {
+  var computerTurn = true;
+
+  while (computerTurn) {
+    //Generate a new location for next move
+    computerMove = Math.floor(Math.random() * 9);
+    console.log(computerMove);
+
+    if (BoardGridArr[computerMove] === "" && !gameButtons[computerMove].disabled) {
+      gameButtons[computerMove].textContent = currentPlayer;
+      BoardGridArr[computerMove] = currentPlayer;
+      gameButtons[computerMove].disabled = true;
+      computerTurn = false;
+    } else {
+      computerTurn = true;
+    }
+  }
+
+  console.log(computerTurn); //Generate a new location for next move
+  // computerMove = Math.floor(Math.random() * 9);
 };
