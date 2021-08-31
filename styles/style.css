@@ -18,7 +18,7 @@
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   grid-template-rows: repeat(3, 1fr);
-  height: 75%;
+  height: 70%;
   width: 75%;
 }
 #grid__restart {
