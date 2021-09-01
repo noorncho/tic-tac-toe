@@ -1,0 +1,23 @@
+{
+  "name": "tic-tac-toe",
+  "version": "1.0.0",
+  "description": "- A simple TicTacToe game built using HTML, CSS, SASS and JavaScript.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/noorncho/tic-tac-toe.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/noorncho/tic-tac-toe/issues"
+  },
+  "homepage": "https://github.com/noorncho/tic-tac-toe#readme",
+  "dependencies": {
+    "confetti-js": "0.0.18"
+  }
+}
