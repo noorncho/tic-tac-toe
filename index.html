@@ -31,16 +31,17 @@
             <button id="restart">New Game</button>
         </div>
     </main>
-
+    <canvas id="my-canvas"></canvas>
     <div class="overlay modal">
-        <div class="modal">
-            <span class="modal__close">&times;</span>
-            <div id="overlay__content">
+        <div class="modal">            
+            <span class="modal__close">&times;</span>            
+            <div id="overlay__content">                
             </div>
         </div>
     </div>
 
     <!-- JavaScript file -->
-    <script src="./scripts/script.js"></script>
+    <script type="module" src="./scripts/script.js"></script>
+    <script src="./node_modules/confetti-js/dist/index.min.js"></script>
 </body>
 </html>

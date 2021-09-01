@@ -1,3 +1,6 @@
+// At the component you want to use confetti
+import ConfettiGenerator from "../node_modules/confetti-js/src/confetti.js";
+
 //Board Grid buttons
 const gameButtons = document.querySelectorAll(".board_button");;
 
@@ -32,6 +35,10 @@ const winCombos = [[0, 1, 2],
                     [0, 4, 8], 
                     [2, 4, 6]];
 
+//Generate Confetti for when a player wins
+const confettiElement = document.getElementById('my-canvas');
+const confettiSettings = { target: confettiElement };
+const confetti = new ConfettiGenerator(confettiSettings);
 
 /***** Eventlistener ("click") for all buttons *****/
 
@@ -39,7 +46,12 @@ gameButtons.forEach(button => {
     button.addEventListener("click", e => {
         const selectedButton = e.target; //Get the that was clicked
         singlePlayerButton.disabled = true; // Disabled if player does not selected before first move
-        document.getElementById("player-mode").innerHTML = "Two Player Mode Activated";
+        //document.getElementById("player-mode").innerHTML = "Two Player Mode Activated";
+        if(singlePlayerMode){
+            document.getElementById("player-mode").innerHTML = "Single Player Mode Activated";
+        }else{
+            document.getElementById("player-mode").innerHTML = "Two Player Mode Activated";
+        }    
 
         gamePlay(selectedButton);
     });
@@ -55,7 +67,7 @@ modalclose.addEventListener("click", () => {
 
 singlePlayerButton.addEventListener("click", () => {
     console.log("Single Player mode activated");
-    document.getElementById("player-mode").innerHTML = "Single Player Mode Activated";
+    //document.getElementById("player-mode").innerHTML = "Single Player Mode Activated";
     singlePlayerMode = true;
     singlePlayerButton.disabled = true;
 });
@@ -108,6 +120,7 @@ const restartGame = () => {
         button.textContent = "";
         button.disabled = false;
     });
+    confetti.clear(); //Turns off winner confetti
 }
 
 /**
@@ -145,6 +158,7 @@ const checkGameOver = (isWinner) =>{
         document.getElementById("overlay__content").innerHTML = `${currentPlayer} is the winner`;
         gameModal.style.display = "block";
         gameButtons.forEach(button => button.disabled = true);
+        confetti.render();//Winner confetti
     }else if(moveCounter == 9){
         document.getElementById("overlay__content").innerHTML = "Game Draw";
         gameModal.style.display = "block";
