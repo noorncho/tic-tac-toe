@@ -13,7 +13,7 @@ const BoardGridArr = ["", "", "", "", "", "", "", "", ""];
 
 //Counter variables
 let turnCounter = 0; //Track player turns
-let moveCounter = 1; //Tracks number of moved taken
+let moveCounter = 0; //Tracks number of moved taken
 let isWinner = false;
 let currentPlayer = "X"; //X is always the first player or the human
 
@@ -78,8 +78,6 @@ const gamePlay = (selectedButton) => {
         soloPlayerMode();
         checkForWin();
     }
-
-    //checkGameOver(isWinner);
 }
 
 /**
@@ -140,6 +138,7 @@ const checkForWin = () => {
  * @param {*} isWinner 
  */
 const checkGameOver = (isWinner) =>{
+    moveCounter++;
 
     if(isWinner){
         document.getElementById("overlay__content").innerHTML = `${currentPlayer} is the winner`;
@@ -150,7 +149,6 @@ const checkGameOver = (isWinner) =>{
         gameModal.style.display = "block";
         gameButtons.forEach(button => button.disabled = true);
     }else{
-        moveCounter++;
         //Update counter
         turnCounter++;
         //Switch the player
@@ -165,17 +163,18 @@ const checkGameOver = (isWinner) =>{
 const soloPlayerMode = () => {
     let computerTurn = true;
     
-    do{
+    while(computerTurn){
         computerMove = Math.floor(Math.random() * 9);
         console.log(computerMove);
-        if(BoardGridArr[computerMove] === "" && !gameButtons[computerMove].disabled){
+
+        if(BoardGridArr[computerMove] === ""){
+            console.log("Inside computer if loop")
             gameButtons[computerMove].textContent = currentPlayer;
             BoardGridArr[computerMove] = currentPlayer;
             gameButtons[computerMove].disabled = true;
             computerTurn = false;
         }
-
-    }while(computerTurn);
+    }
 
     console.log(computerTurn);
 }
