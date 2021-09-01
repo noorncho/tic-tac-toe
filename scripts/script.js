@@ -13,7 +13,7 @@ const BoardGridArr = ["", "", "", "", "", "", "", "", ""];
 
 //Counter variables
 let turnCounter = 0; //Track player turns
-let moveCounter = 0; //Tracks number of moved taken
+let moveCounter = 1; //Tracks number of moved taken
 let isWinner = false;
 let currentPlayer = "X"; //X is always the first player or the human
 
@@ -74,10 +74,11 @@ const gamePlay = (selectedButton) => {
 
     checkForWin();
 
-    if(singlePlayerMode){
+    if(singlePlayerMode && moveCounter < 9){
         soloPlayerMode();
         checkForWin();
     }
+    //checkGameOver(isWinner);
 }
 
 /**
@@ -138,7 +139,7 @@ const checkForWin = () => {
  * @param {*} isWinner 
  */
 const checkGameOver = (isWinner) =>{
-    moveCounter++;
+    //moveCounter++;
 
     if(isWinner){
         document.getElementById("overlay__content").innerHTML = `${currentPlayer} is the winner`;
@@ -149,6 +150,7 @@ const checkGameOver = (isWinner) =>{
         gameModal.style.display = "block";
         gameButtons.forEach(button => button.disabled = true);
     }else{
+        moveCounter++;
         //Update counter
         turnCounter++;
         //Switch the player
