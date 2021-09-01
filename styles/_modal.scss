@@ -16,6 +16,7 @@
 
     .modal{
         max-width: 100%;
+        height: 75%;
         position: relative;
         top: 10px;
         margin: 5% 10%;
@@ -25,11 +26,31 @@
         box-shadow: 0 0 10px #000000;
         display: grid;
         grid-template-columns: 1fr;
-        grid-template-rows: 1fr 1fr 2fr;
+        grid-template-rows: 1fr 2fr;
         pointer-events: auto;
+
+        &__close{
+            font-size: 2em;
+        }
     }
 }
 
 #overlay__content{
     text-align: center;
+    font-size: 3em;
+}
+
+@media screen and(min-width: 768px){
+
+    .overlay{
+        .modal{
+            &__close{
+                font-size: 3em;
+            }
+        }
+    }
+
+    #overlay__content{
+        font-size: 4em;
+    }
 }
