@@ -1,5 +1,5 @@
-// At the component you want to use confetti
-//import ConfettiGenerator from "../node_modules/confetti-js/src/confetti.js";
+/*// At the component you want to use confetti
+//import ConfettiGenerator from "../node_modules/confetti-js/src/confetti.js";*/
 
 //Board Grid buttons
 const gameButtons = document.querySelectorAll(".board_button");;
