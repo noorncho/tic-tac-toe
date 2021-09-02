@@ -23,7 +23,7 @@ let currentPlayer = "X"; //X is always the first player or the human
 //Solo Player Mode - Variables
 const singlePlayerButton = document.getElementById("single-player");
 let singlePlayerMode = false;
-let computerMove;// = Math.floor(Math.random() * 9); //Generate number - [0, 1, 2, 3, 4, 5, 6, 7, 8]
+let computerMove; //Generate number - [0, 1, 2, 3, 4, 5, 6, 7, 8]
 
 //Win Combos - indexes in the array that have to match to win
 const winCombos = [[0, 1, 2], 
@@ -46,7 +46,6 @@ gameButtons.forEach(button => {
     button.addEventListener("click", e => {
         const selectedButton = e.target; //Get the that was clicked
         singlePlayerButton.disabled = true; // Disabled if player does not selected before first move
-        //document.getElementById("player-mode").innerHTML = "Two Player Mode Activated";
         if(singlePlayerMode){
             document.getElementById("player-mode").innerHTML = "Single Player Mode Activated";
         }else{
@@ -66,8 +65,6 @@ modalclose.addEventListener("click", () => {
 });
 
 singlePlayerButton.addEventListener("click", () => {
-    console.log("Single Player mode activated");
-    //document.getElementById("player-mode").innerHTML = "Single Player Mode Activated";
     singlePlayerMode = true;
     singlePlayerButton.disabled = true;
 });
@@ -86,11 +83,10 @@ const gamePlay = (selectedButton) => {
 
     checkForWin();
 
-    if(singlePlayerMode && moveCounter < 9){
+    if(singlePlayerMode && moveCounter < 9 && !isWinner){
         soloPlayerMode();
         checkForWin();
     }
-    //checkGameOver(isWinner);
 }
 
 /**
@@ -152,7 +148,6 @@ const checkForWin = () => {
  * @param {*} isWinner 
  */
 const checkGameOver = (isWinner) =>{
-    //moveCounter++;
 
     if(isWinner){
         document.getElementById("overlay__content").innerHTML = `${currentPlayer} is the winner`;
@@ -181,16 +176,12 @@ const soloPlayerMode = () => {
     
     while(computerTurn){
         computerMove = Math.floor(Math.random() * 9);
-        console.log(computerMove);
 
         if(BoardGridArr[computerMove] === ""){
-            console.log("Inside computer if loop")
             gameButtons[computerMove].textContent = currentPlayer;
             BoardGridArr[computerMove] = currentPlayer;
             gameButtons[computerMove].disabled = true;
             computerTurn = false;
         }
     }
-
-    console.log(computerTurn);
 }

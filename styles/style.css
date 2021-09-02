@@ -14,6 +14,9 @@
   width: 100%;
   text-align: center;
 }
+#grid__title #single-player {
+  font-size: 0.2em;
+}
 #grid__buttons {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
@@ -28,6 +31,9 @@
 @media screen and (min-width: 768px) {
   #grid__title {
     font-size: 1.7em;
+  }
+  #grid__buttons {
+    height: 90%;
   }
 }
 .board_button {
