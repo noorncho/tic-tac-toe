@@ -33,12 +33,12 @@
 .board_button {
   border-color: rgba(39, 7, 68, 0);
   font-size: 4em;
-  background-color: white;
+  background-color: rgba(92, 52, 90, 0.548);
 }
 
 button:disabled {
   color: #535353;
-  background-color: aqua;
+  background-color: rgba(92, 52, 90, 0.068);
 }
 
 .border_bottom {
@@ -108,4 +108,8 @@ button:disabled {
 }
 * {
   box-sizing: border-box;
+}
+
+body {
+  background-color: rgba(92, 52, 90, 0.192);
 }
