@@ -14,6 +14,9 @@
   width: 100%;
   text-align: center;
 }
+#grid__title #single-player {
+  font-size: 0.2em;
+}
 #grid__buttons {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
@@ -29,16 +32,19 @@
   #grid__title {
     font-size: 1.7em;
   }
+  #grid__buttons {
+    height: 90%;
+  }
 }
 .board_button {
   border-color: rgba(39, 7, 68, 0);
   font-size: 4em;
-  background-color: white;
+  background-color: rgba(92, 52, 90, 0.548);
 }
 
 button:disabled {
   color: #535353;
-  background-color: aqua;
+  background-color: rgba(92, 52, 90, 0.068);
 }
 
 .border_bottom {
@@ -108,4 +114,8 @@ button:disabled {
 }
 * {
   box-sizing: border-box;
+}
+
+body {
+  background-color: rgba(92, 52, 90, 0.192);
 }
