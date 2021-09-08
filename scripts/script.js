@@ -56,9 +56,7 @@ gameButtons.forEach(button => {
     });
 });
 
-restartButton.addEventListener("click", () => {
-    restartGame();
-});
+restartButton.addEventListener("click", restartGame);
 
 modalclose.addEventListener("click", () => {
     gameModal.style.display = "none"
