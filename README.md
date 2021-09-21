@@ -1,5 +1,19 @@
-# Tic-TacToe
+# TicTacToe
+A recreation of the classic pen-and-paper game tictactoe.
 
-- A simple TicTacToe game built using HTML, CSS, SASS and JavaScript.
+### Tech Stack
+- Vanilla JS ES6
+- HTML5
+- CSS3 / SASS
 
-- The game can either be played in a single player mode (human vs computer), but selecting the 'Solo Player' or as a two player mode (human vs human).
+### General Info
+This game was created during week 4 of the _nology course.
+
+The game has the option to be played either in a single player mode against the computer or in a two player mode. The mode has to be selected before the first move is made or the default two-player mode will start.
+
+### Roadmap / Todo
+At the moment the game is playable but in my spare time I will be adding:
+
+- A score tracker
+- Improved play mode selection system
+- Confetti or animation to win pop-up
