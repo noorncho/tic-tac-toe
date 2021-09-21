@@ -17,3 +17,4 @@ At the moment the game is playable but in my spare time I will be adding:
 - A score tracker
 - Improved play mode selection system
 - Confetti or animation to win pop-up
+- Add more styling
