@@ -1,3 +1,5 @@
+![TicTacToe Game Thumbnail](/assets/images/tictactoe-game.png)
+
 # TicTacToe
 A recreation of the classic pen-and-paper game tictactoe.
 
