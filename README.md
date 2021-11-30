@@ -1,7 +1,9 @@
 ![TicTacToe Game Thumbnail](/images/tictactoe-game.png)
 
 # TicTacToe
-A recreation of the classic pen-and-paper game tictactoe.
+A recreation of the classic pen-and-paper game tictactoe in JavaScript.
+
+A Java version can be found [here](https://github.com/noorncho/tictactoe-java).
 
 ## General Info
 This game was created during week 4 of the _nology course.
